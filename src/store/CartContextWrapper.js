@@ -3,9 +3,28 @@ import CartContext from './cart-context';
 
 const cartReducer = (state, action) => {
   if (action.type === 'ADD_ITEM') {
+    const totalAmount =
+      state.totalAmount + action.item.price * action.item.amount;
+    const existingItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    const existingCartItem = state.items[existingItemIndex];
+    let existingItems;
+
+    if (existingCartItem) {
+      existingItems = [...state.items];
+      const existingItemToUpdate = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount,
+      };
+      existingItems[existingItemIndex] = existingItemToUpdate;
+    } else {
+      existingItems = state.items.concat(action.item);
+    }
+
     return {
-      items: state.items.concat(action.item),
-      totalAmount: state.totalAmount + action.item.price * action.item.amount,
+      items: existingItems,
+      totalAmount: totalAmount,
     };
   }
   if (action.type === 'REMOVE_ITEM') {
