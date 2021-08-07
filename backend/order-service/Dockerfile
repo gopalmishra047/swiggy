@@ -1,11 +1,11 @@
 FROM java/java11-jdk
 
-LABEL owner=LyraNetwork
-LABEL Team=PZL
-LABEL Product=PZL-PaymentEngine
-LABEL GitRepo=https://git.lbg.office.fr.lyra/pzl/backend
+LABEL owner=Gopal Mishra
+LABEL Team=food-order
+LABEL Product=Swiggy - Order Service
+LABEL GitRepo=https://github.com/gopalmishra047/food-order-app
 
-COPY src/main/resources/ssm/ /opt/lyra/pzl/ssm/
-COPY target/payment-engine-*[^source].jar payment-engine.jar
 
-CMD java -jar payment-engine.jar
+COPY target/order-service*[^source].jar order-service.jar
+
+CMD java -jar order-service.jar
