@@ -1,15 +1,15 @@
-package com.food.order.controller;
+package com.swiggy.order.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/order")
 @RestController
+@RequestMapping("/order/")
 public class OrderController {
 
-  @GetMapping("/check")
-  public String checkStatus() {
-    return "OK";
+  @GetMapping("/status")
+  public String status(){
+    return "Order service started...";
   }
 }
