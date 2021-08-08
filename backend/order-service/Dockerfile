@@ -1,11 +1,5 @@
-FROM java/java11-jdk
+FROM java/java8-jdk
 
-LABEL owner=Gopal Mishra
-LABEL Team=food-order
-LABEL Product=Swiggy - Order Service
-LABEL GitRepo=https://github.com/gopalmishra047/food-order-app
+ADD target/order-service-0.1.1-SNAPSHOT.jar order-service-0.1.1-SNAPSHOT.jar
 
-
-COPY target/order-service*[^source].jar order-service.jar
-
-CMD java -jar order-service.jar
+CMD java -jar order-service-0.1.1-SNAPSHOT.jar

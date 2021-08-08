@@ -1,6 +1,5 @@
 package com.swiggy.order.entity;
 
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -13,13 +12,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class Meals {
 
   @Id private String id;
 
-  private String orderName;
+  private String name;
 
-  private Date orderDate;
+  private String description;
 
-  private String address;
+  private long price;
 }
