@@ -7,10 +7,15 @@ import MealItem from './MealItem/MealItem';
 const AvailableMeals = () => {
 
   const [availableMeals, setAvailableMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
   
   useEffect(() => {
     const fetchMeals = async () => {
      const response = await fetch("http://localhost:8080/order/getAllMeals");
+     if(!response.ok){
+       throw new Error("Something went wrong !");
+     }
      const responseData = await response.json();
      const loadedMeals = [];
 
@@ -21,12 +26,31 @@ const AvailableMeals = () => {
          description: responseData[meal].description,
          price: responseData[meal].price
        });
+       setIsLoading(false);
      }
      setAvailableMeals(loadedMeals);
     };
-    fetchMeals();
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    }) 
   },[]);
 
+   if(httpError){
+    return (
+      <section className = {classes.mealsLoadingError}>
+        <p>{httpError}</p>
+      </section>
+    );
+  }
+
+  if(isLoading){
+    return (
+      <section className = {classes.mealsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   const mealItem = availableMeals.map((meal) => (
     <MealItem
