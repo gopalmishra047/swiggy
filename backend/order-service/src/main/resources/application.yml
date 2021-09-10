@@ -10,3 +10,16 @@ spring:
         hibernate:
           dialect: org.hibernate.dialect.MariaDB102Dialect
       open-in-view: false
+
+server:
+  timezone: Asia/Kolkata
+  port: 8000
+  tomcat:
+    protocol-header: X-Forwarded-Proto
+    connection-timeout: 60s
+  error:
+    include-stacktrace: never
+    whitelabel:
+      enabled: false
+  jetty:
+    connection-idle-timeout: 1000ms

@@ -1,2 +1,25 @@
-mariadb:
-  host: database
+spring:
+  datasource:
+    url: jdbc:mariadb://192.168.33.10:3306/food-order?useSSL=false
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MariaDB102Dialect
+      open-in-view: false
+
+server:
+  timezone: Asia/Kolkata
+  port: 8000
+  tomcat:
+    protocol-header: X-Forwarded-Proto
+    connection-timeout: 60s
+  error:
+    include-stacktrace: never
+    whitelabel:
+      enabled: false
+  jetty:
+    connection-idle-timeout: 1000ms
