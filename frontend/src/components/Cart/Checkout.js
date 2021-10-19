@@ -1,37 +1,83 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import classes from "./Checkout.module.css";
+import checkoutValidation from "../../Utils/checkoutValidation";
 
 const Checkout = props => {
-  const nameInputRef = useRef();
-  const streetInputRef = useRef();
-  const postalInputRef = useRef();
-  const cityInputRef = useRef();
+  const [values, setValues] = useState({
+    name: "",
+    street: "",
+    postal: "",
+    city: ""
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleInputChange = event => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    });
+  };
 
   const confirmHandler = event => {
     event.preventDefault();
-    const name = nameInputRef.current.value;
-    const street = streetInputRef.current.value;
-    const postal = postalInputRef.current.value;
-    const city = cityInputRef.current.value;
+    setErrors(checkoutValidation(values));
   };
+
+  const nameDivClass = `${classes.control} ${
+    errors.name === undefined ? "" : classes.invalid
+  }`;
+  const streetDivClass = `${classes.control} ${
+    errors.street === undefined ? "" : classes.invalid
+  }`;
+  const postalDivClass = `${classes.control} ${
+    errors.postal === undefined ? "" : classes.invalid
+  }`;
+  const cityDivClass = `${classes.control} ${
+    errors.city === undefined ? "" : classes.invalid
+  }`;
 
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
-      <div className={classes.control}>
+      <div className={nameDivClass}>
         <label htmlFor="name">Your Name</label>
-        <input type="text" id="name" />
+        <input
+          type="text"
+          name="name"
+          onChange={handleInputChange}
+          value={values.name}
+        />
+        {errors.name && <p>{errors.name}</p>}
       </div>
-      <div className={classes.control}>
+      <div className={streetDivClass}>
         <label htmlFor="street">Street</label>
-        <input type="text" id="street" />
+        <input
+          type="text"
+          name="street"
+          onChange={handleInputChange}
+          value={values.street}
+        />
+        {errors.street && <p>{errors.street}</p>}
       </div>
-      <div className={classes.control}>
+      <div className={postalDivClass}>
         <label htmlFor="postal">Postal Code</label>
-        <input type="text" id="postal" />
+        <input
+          type="number"
+          name="postal"
+          onChange={handleInputChange}
+          value={values.postal}
+        />
+        {errors.postal && <p>{errors.postal}</p>}
       </div>
-      <div className={classes.control}>
+      <div className={cityDivClass}>
         <label htmlFor="city">City</label>
-        <input type="text" id="city" />
+        <input
+          type="text"
+          name="city"
+          onChange={handleInputChange}
+          value={values.city}
+        />
+        {errors.city && <p>{errors.city}</p>}
       </div>
       <div className={classes.actions}>
         <button type="button" onClick={props.onCancel}>
