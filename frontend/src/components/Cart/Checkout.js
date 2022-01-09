@@ -22,6 +22,10 @@ const Checkout = props => {
   const confirmHandler = event => {
     event.preventDefault();
     setErrors(checkoutValidation(values));
+    // if (errors !== undefined) {
+    //   return;
+    // }
+    props.onConfirm(values);
   };
 
   const nameDivClass = `${classes.control} ${

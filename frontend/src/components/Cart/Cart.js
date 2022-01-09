@@ -21,6 +21,22 @@ const Cart = props => {
     setShowCheckoutForm(true);
   };
 
+  const submitOrderHandler = orderData => {
+    fetch("http://localhost:8000/order/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        customerName: orderData.name,
+        street: orderData.street,
+        postalCode: orderData.postal,
+        city: orderData.city,
+        // mealID: cartContext.items.id,
+        // quantity: cartContext.items.amount,
+        totalPrice: cartContext.totalAmount
+      })
+    });
+  };
+
   return (
     <Modal onClose={props.onHideCart}>
       <ul className={classes["cart-items"]}>
@@ -40,7 +56,7 @@ const Cart = props => {
         <span>{totalAmount}</span>
       </div>
       {!isCartEmpty && showCheckoutForm && (
-        <Checkout onCancel={props.onHideCart} />
+        <Checkout onCancel={props.onHideCart} onConfirm={submitOrderHandler} />
       )}
       <div className={classes.actions}>
         {!showCheckoutForm && (
