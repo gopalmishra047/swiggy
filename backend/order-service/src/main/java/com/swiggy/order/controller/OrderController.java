@@ -1,11 +1,8 @@
 package com.swiggy.order.controller;
 
-import com.swiggy.order.dto.MealRequest;
-import com.swiggy.order.dto.OrderDTO;
-import com.swiggy.order.dto.OrderRequest;
-import com.swiggy.order.entity.Meals;
+import com.swiggy.order.dto.OrderRequestDto;
+import com.swiggy.order.dto.OrderResponseDto;
 import com.swiggy.order.service.OrderService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,17 +23,7 @@ public class OrderController {
   }
 
   @PostMapping("/create")
-  public OrderDTO createOrder(@RequestBody OrderRequest request) {
+  public OrderResponseDto createOrder(@RequestBody OrderRequestDto request) {
     return orderService.createOrder(request);
-  }
-
-  @PostMapping("/addMeal")
-  public Meals addMeals(@RequestBody MealRequest mealRequest) {
-    return orderService.addMeals(mealRequest);
-  }
-
-  @GetMapping("/getAllMeals")
-  public List<Meals> getAllMeals() {
-    return orderService.getAllMeals();
   }
 }

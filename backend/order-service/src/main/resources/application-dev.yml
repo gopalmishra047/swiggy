@@ -1,14 +1,16 @@
 spring:
   datasource:
-    url: jdbc:mariadb://192.168.33.10:3306/food-order?useSSL=false
+    url: jdbc:mariadb://192.168.33.10:3306/swiggy?useSSL=false
     username: root
     password: root
     driver-class-name: org.mariadb.jdbc.Driver
 
-    jpa:
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.MariaDB102Dialect
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB102Dialect
+        show_sql: true
+        format_sql: true
       open-in-view: false
 
 server:
@@ -23,3 +25,13 @@ server:
       enabled: false
   jetty:
     connection-idle-timeout: 1000ms
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

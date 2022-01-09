@@ -4,7 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class MealRequest implements Serializable {
+public class AddMealRequestDto implements Serializable {
 
   private String name;
 
