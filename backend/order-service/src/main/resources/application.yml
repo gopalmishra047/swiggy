@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mariadb://192.168.33.10:3306/swiggy?useSSL=false
+    url: jdbc:mariadb://${mariadb.host}:3306/food-order?useSSL=false&serverTimezone=+05:30&useLegacyDatetimeCode=false&useBatchMultiSend=false
     username: root
     password: root
     driver-class-name: org.mariadb.jdbc.Driver
@@ -9,6 +9,7 @@ spring:
       properties:
         hibernate:
           dialect: org.hibernate.dialect.MariaDB102Dialect
+
       open-in-view: false
 
 server:

@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS `swiggy`;
-CREATE DATABASE `swiggy`;
-USE `swiggy`;
+DROP DATABASE IF EXISTS `food-order`;
+CREATE DATABASE `food-order`;
+USE `food-order`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
